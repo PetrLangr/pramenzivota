@@ -1,36 +1,132 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Pramen života s.r.o. - Projekt
 
-## Getting Started
+Kompletní projekt pro Centrum energetické rovnováhy skládající se ze **statického webu** a **rezervačního systému**.
 
-First, run the development server:
+## 📁 Struktura projektu
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+pramen_zivota/
+├── website/                    # 🌐 Statický HTML web (Yogastic šablona)
+│   ├── index.html             # Hlavní stránka
+│   ├── about.html             # O nás
+│   ├── services.html          # Služby
+│   ├── contact.html           # Kontakt
+│   ├── assets/                # CSS, JS, obrázky
+│   └── ...                    # Ostatní HTML stránky
+├── docs/                      # 📚 Dokumentace rezervačního systému
+│   ├── database.md           # Datový model
+│   ├── api.md                # API reference
+│   ├── architecture.md       # Architektura
+│   ├── implementation-guide.md # Implementační návod
+│   ├── payment-system.md     # Platební systém
+│   └── deployment.md         # Deployment guide
+└── README.md                 # Tento soubor
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🌐 Statický web (/website/)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 🎯 **Status**: ✅ **Připraveno k rebrandingu**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Kompletní Yogastic HTML šablona** s:
+- ✅ **Všechny HTML stránky** (index, about, services, contact, atd.)
+- ✅ **CSS styly** (Bootstrap + custom)
+- ✅ **JavaScript** (jQuery, AOS animace, ityped)
+- ✅ **Obrázky a ikony** 
+- ✅ **Responzivní design**
 
-## Learn More
+### 🔄 **Další kroky pro web:**
+1. **Přejmenovat texty** z "Yogastic" na "Pramen života s.r.o."
+2. **Lokalizace** z angličtiny na češtinu
+3. **Změnit služby** z yoga na energetické terapie
+4. **Aktualizovat kontakty** (Praha místo Melbourne)
+5. **Změnit barvy** na modrou/zelenou paletu
+6. **Nahradit logo** a klíčové obrázky
 
-To learn more about Next.js, take a look at the following resources:
+### 📄 **Aktuální obsah:**
+- **Hero**: "Start Healing Your Mind" s typing animací
+- **Services**: Prenatal Yoga, Meditation, Nutrition, Hatha Yoga  
+- **About**: "Take Your Yoga to the Next Level"
+- **Contact**: Kontaktní formulář + info
+- **Footer**: Yogastic branding
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 💻 Rezervační systém (budoucí implementace)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 🎯 **Status**: 📋 **Zdokumentováno, připraveno k implementaci**
 
-## Deploy on Vercel
+**Next.js 14+ aplikace** s:
+- **PostgreSQL** databáze (Prisma ORM)
+- **NextAuth** autentizace s rolemi
+- **Stripe/Comgate** platební systém
+- **Admin panel** pro správu kurzů a rezervací
+- **Email notifications** pro potvrzení
+- **CSV export** rezervací
+- **Standalone modul** pro CMS integraci
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 🛠 **Implementace:**
+Podle dokumentace v `/docs/implementation-guide.md` - postupný návod od inicializace po produkční nasazení.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 🔗 **Integrace se statickým webem:**
+- **CTA tlačítka** na webu povedou na rezervační systém
+- **Subdoména** nebo **složka** (např. rezervace.pramenzivota.cz)
+- **Společný design** systém a branding
+
+## 🚀 Quick Start
+
+### Pro statický web:
+```bash
+cd website
+# Otevřít index.html v prohlížeči
+open index.html
+```
+
+### Pro rezervační systém:
+```bash
+# Podle docs/implementation-guide.md
+npx create-next-app@latest reservation-system
+# ... pokračovat podle guide
+```
+
+## 📚 Dokumentace
+
+Kompletní dokumentace rezervačního systému:
+- **[Database](docs/database.md)** - Datový model (Prisma schema)
+- **[API](docs/api.md)** - REST API endpoints
+- **[Architecture](docs/architecture.md)** - Systémová architektura
+- **[Implementation](docs/implementation-guide.md)** - Postupný návod
+- **[Payments](docs/payment-system.md)** - Stripe/Comgate systém
+- **[Deployment](docs/deployment.md)** - Produkční nasazení
+
+## 🎨 Design systém
+
+### Plánované barvy (Pramen života):
+- **Primární modrá**: `#1B6FD8` 
+- **Přírodní zelená**: `#A7D7C5`
+- **Bílá**: `#FFFFFF`
+- **Šedá**: `#1F2937`, `#4B5563`
+
+### Současné barvy (Yogastic):
+- **Primární**: `#242424`
+- **Sekundární**: `#764979` (fialová)
+- **Accent**: `#413625`
+- **Soft orange**: `#e1ccad`
+
+## 🔄 Workflow
+
+### Fáze 1: Statický web
+1. ✅ **Yogastic šablona** připravena v `/website/`
+2. **Rebrand** na Pramen života (texty, barvy, logo)
+3. **Testování** a optimalizace
+4. **Deploy** statického webu
+
+### Fáze 2: Rezervační systém  
+1. **Inicializace** Next.js projektu
+2. **Database** setup (PostgreSQL + Prisma)
+3. **Implementace** dle dokumentace
+4. **Integrace** se statickým webem
+5. **Deploy** rezervačního systému
+
+---
+
+**Aktuální stav**: ✅ **Yogastic šablona připravena, dokumentace hotova**
+
+**Další krok**: Rebrand statického webu na "Pramen života s.r.o."

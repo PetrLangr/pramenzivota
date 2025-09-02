@@ -1,0 +1,381 @@
+// Rezervační systém inspirovaný Amelia - Prisma Schema
+// Pramen života s.r.o. - Centrum energetické rovnováhy
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// ADMINISTRACE A UŽIVATELÉ
+// ============================================================================
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  role      UserRole @default(ADMIN)
+  password  String
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Administrátor může spravovat vše
+  @@map("users")
+}
+
+enum UserRole {
+  ADMIN     // Plný přístup ke správě
+  EMPLOYEE  // Budoucí rozšíření
+  CUSTOMER  // Budoucí rozšíření
+}
+
+// ============================================================================
+// KATEGORIE SLUŽEB
+// ============================================================================
+
+model ServiceCategory {
+  id          String @id @default(cuid())
+  name        String
+  description String?
+  color       String? // Hex barva pro rozlišení v kalendáři
+  sortOrder   Int     @default(0)
+  
+  // Relace
+  services Service[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("service_categories")
+}
+
+// ============================================================================
+// SLUŽBY
+// ============================================================================
+
+model Service {
+  id          String  @id @default(cuid())
+  name        String
+  description String?
+  
+  // Základní nastavení
+  duration       Int     // minuty
+  price          Decimal @db.Decimal(10,2)
+  currency       String  @default("CZK")
+  
+  // Kapacita
+  minCapacity    Int     @default(1)
+  maxCapacity    Int     @default(1)
+  
+  // Buffer časy (minuty)
+  bufferBefore   Int     @default(0)
+  bufferAfter    Int     @default(0)
+  
+  // Vizuální
+  color          String? // Hex barva
+  image          String? // URL hlavního obrázku
+  
+  // Status
+  isActive       Boolean @default(true)
+  sortOrder      Int     @default(0)
+  
+  // Relace
+  categoryId     String
+  category       ServiceCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  
+  // Další relace
+  employeeServices EmployeeService[]
+  serviceExtras    ServiceExtra[]
+  serviceGallery   ServiceGalleryImage[]
+  appointments     Appointment[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("services")
+}
+
+// ============================================================================
+// EXTRA SLUŽBY (doplňky)
+// ============================================================================
+
+model ServiceExtra {
+  id          String  @id @default(cuid())
+  name        String
+  description String?
+  price       Decimal @db.Decimal(10,2)
+  duration    Int     @default(0) // dodatečné minuty
+  
+  // Relace
+  serviceId   String
+  service     Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("service_extras")
+}
+
+// ============================================================================
+// GALERIE SLUŽEB
+// ============================================================================
+
+model ServiceGalleryImage {
+  id        String @id @default(cuid())
+  imageUrl  String
+  altText   String?
+  sortOrder Int    @default(0)
+  
+  // Relace
+  serviceId String
+  service   Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+
+  @@map("service_gallery")
+}
+
+// ============================================================================
+// ZAMĚSTNANCI
+// ============================================================================
+
+model Employee {
+  id          String  @id @default(cuid())
+  firstName   String
+  lastName    String
+  email       String  @unique
+  phone       String?
+  avatar      String? // URL fotografie
+  notes       String? // Interní poznámky
+  
+  // Status
+  isActive    Boolean @default(true)
+  
+  // Relace
+  employeeServices EmployeeService[]
+  workingHours     WorkingHours[]
+  timeOff          TimeOff[]
+  specialDays      SpecialDay[]
+  appointments     Appointment[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("employees")
+}
+
+// ============================================================================
+// PŘIŘAZENÍ SLUŽEB ZAMĚSTNANCŮM
+// ============================================================================
+
+model EmployeeService {
+  id String @id @default(cuid())
+  
+  // Relace
+  employeeId String
+  employee   Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  
+  serviceId  String
+  service    Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  
+  // Individuální nastavení (override výchozích hodnot služby)
+  customPrice    Decimal? @db.Decimal(10,2)
+  customDuration Int?
+  
+  createdAt DateTime @default(now())
+
+  @@unique([employeeId, serviceId])
+  @@map("employee_services")
+}
+
+// ============================================================================
+// PRACOVNÍ DOBA ZAMĚSTNANCŮ
+// ============================================================================
+
+model WorkingHours {
+  id String @id @default(cuid())
+  
+  dayOfWeek  Int     // 0=Neděle, 1=Pondělí, ..., 6=Sobota
+  startTime  String  // HH:MM formát
+  endTime    String  // HH:MM formát
+  
+  // Relace
+  employeeId String
+  employee   Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+
+  @@map("working_hours")
+}
+
+// ============================================================================
+// DNY VOLNA
+// ============================================================================
+
+model TimeOff {
+  id          String    @id @default(cuid())
+  startDate   DateTime
+  endDate     DateTime
+  reason      String?
+  isRecurring Boolean   @default(false) // Např. každoroční svátky
+  
+  // Relace
+  employeeId  String
+  employee    Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+
+  @@map("time_off")
+}
+
+// ============================================================================
+// SPECIÁLNÍ DNY (výjimečná pracovní doba)
+// ============================================================================
+
+model SpecialDay {
+  id        String   @id @default(cuid())
+  date      DateTime
+  startTime String   // HH:MM
+  endTime   String   // HH:MM
+  reason    String?
+  
+  // Relace
+  employeeId String
+  employee   Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+
+  @@map("special_days")
+}
+
+// ============================================================================
+// ZÁKAZNÍCI
+// ============================================================================
+
+model Customer {
+  id        String  @id @default(cuid())
+  firstName String
+  lastName  String
+  email     String  @unique
+  phone     String?
+  notes     String? // Interní poznámky
+  
+  // Statistiky
+  totalAppointments Int @default(0)
+  totalSpent        Decimal @default(0) @db.Decimal(10,2)
+  
+  // Relace
+  appointments Appointment[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("customers")
+}
+
+// ============================================================================
+// REZERVACE (APPOINTMENTS)
+// ============================================================================
+
+model Appointment {
+  id              String            @id @default(cuid())
+  
+  // Základní údaje
+  startDateTime   DateTime
+  endDateTime     DateTime
+  totalPrice      Decimal           @db.Decimal(10,2)
+  totalDuration   Int               // minuty včetně extras
+  
+  // Status
+  status          AppointmentStatus @default(PENDING)
+  
+  // Poznámky
+  customerNotes   String?  // Poznámky od zákazníka
+  internalNotes   String?  // Interní poznámky admina
+  
+  // Relace
+  serviceId       String
+  service         Service   @relation(fields: [serviceId], references: [id])
+  
+  employeeId      String
+  employee        Employee  @relation(fields: [employeeId], references: [id])
+  
+  customerId      String
+  customer        Customer  @relation(fields: [customerId], references: [id])
+  
+  // Platba
+  payment         Payment?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("appointments")
+}
+
+enum AppointmentStatus {
+  PENDING   // Čeká na schválení
+  APPROVED  // Schválená
+  CANCELED  // Zrušená zákazníkem
+  REJECTED  // Odmítnutá správcem
+  NO_SHOW   // Zákazník nepřišel
+  COMPLETED // Uskutečněná
+}
+
+// ============================================================================
+// PLATBY
+// ============================================================================
+
+model Payment {
+  id              String        @id @default(cuid())
+  
+  amount          Decimal       @db.Decimal(10,2)
+  currency        String        @default("CZK")
+  method          PaymentMethod
+  status          PaymentStatus @default(PENDING)
+  
+  // Platební brána data
+  transactionId   String?       // ID transakce z brány
+  gatewayResponse Json?         // Odpověď z platební brány
+  
+  // Relace
+  appointmentId   String        @unique
+  appointment     Appointment   @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("payments")
+}
+
+enum PaymentMethod {
+  CARD         // Karta online
+  BANK_TRANSFER // Bankovní převod
+  ON_SITE      // Platba na místě
+  PAYPAL       // Budoucí rozšíření
+}
+
+enum PaymentStatus {
+  PENDING   // Čeká na platbu
+  PAID      // Zaplaceno
+  FAILED    // Platba selhala
+  REFUNDED  // Vráceno
+}
+
+// ============================================================================
+// NASTAVENÍ SYSTÉMU
+// ============================================================================
+
+model Settings {
+  id    String @id @default(cuid())
+  key   String @unique
+  value Json
+  
+  updatedAt DateTime @updatedAt
+
+  @@map("settings")
+}
