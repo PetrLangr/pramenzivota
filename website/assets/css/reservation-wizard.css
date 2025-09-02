@@ -149,6 +149,11 @@
     overflow-y: auto;
 }
 
+/* Mobile Navigation - Hidden by default */
+.mobile-navigation {
+    display: none;
+}
+
 /* Real Calendar System Layout */
 .calendar-header {
     display: flex;
@@ -827,32 +832,159 @@
     box-shadow: 0 6px 20px rgba(127, 176, 105, 0.4);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* Mobile First Responsive Design */
+@media (max-width: 992px) {
     .reservation-wizard {
-        padding: 1rem;
+        height: auto;
+        min-height: 600px;
+        margin: 1rem;
         border-radius: 15px;
     }
     
-    .step-circle {
-        width: 50px;
-        height: 50px;
-        font-size: 16px;
+    /* Mobile Layout - Stack vertically */
+    .wizard-layout {
+        flex-direction: column;
+        height: auto;
     }
     
-    .step-label {
-        font-size: 12px;
+    /* Mobile Sidebar - horizontal steps */
+    .wizard-sidebar {
+        width: 100%;
+        border-radius: 15px 15px 0 0;
+        padding: 1rem;
     }
     
-    .service-card {
+    .sidebar-steps {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         margin-bottom: 1rem;
     }
     
-    .progress-bar-container {
-        margin-top: -25px;
+    .sidebar-step {
+        flex-direction: column;
+        margin-bottom: 0;
+        margin-right: 0.5rem;
+        padding: 0.5rem;
+        text-align: center;
+        flex: 1;
     }
     
-    /* Date/Time selection mobile - stack vertically */
+    .sidebar-step:last-child {
+        margin-right: 0;
+    }
+    
+    .sidebar-step-circle {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+    }
+    
+    .sidebar-step-title {
+        font-size: 12px;
+    }
+    
+    .sidebar-step-status {
+        font-size: 10px;
+    }
+    
+    /* Hide sidebar navigation on mobile - use inline navigation */
+    .sidebar-navigation {
+        display: none;
+    }
+    
+    /* Mobile Content */
+    .wizard-content {
+        width: 100%;
+        padding: 1rem;
+    }
+    
+    /* Mobile Navigation - Inline Bottom */
+    .mobile-navigation {
+        display: block;
+        background: rgba(248, 249, 250, 0.8);
+        padding: 1rem;
+        border-top: 1px solid #dee2e6;
+        border-radius: 0 0 15px 15px;
+        margin-top: auto;
+    }
+    
+    .mobile-nav-buttons {
+        display: flex;
+        gap: 10px;
+    }
+    
+    /* Mobile Services Grid */
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .service-card-compact {
+        padding: 0.75rem;
+        min-height: 100px;
+    }
+    
+    .service-title {
+        font-size: 14px;
+    }
+    
+    .service-meta-compact {
+        font-size: 12px;
+    }
+    
+    .service-price {
+        font-size: 14px;
+    }
+    
+    .service-description-short {
+        font-size: 11px;
+    }
+    
+    /* Mobile Calendar */
+    .calendar-container {
+        max-width: 100%;
+    }
+    
+    .calendar-cell {
+        min-height: 40px;
+        padding: 2px;
+    }
+    
+    .calendar-cell-number {
+        font-size: 12px;
+    }
+    
+    .calendar-legend {
+        gap: 0.5rem;
+    }
+    
+    .legend-item {
+        font-size: 10px;
+    }
+    
+    /* Mobile Time Slots */
+    .time-slots-grid-compact {
+        grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+        gap: 6px;
+        max-width: 100%;
+    }
+    
+    .time-slot-compact {
+        padding: 8px 4px;
+    }
+    
+    .time-slot-time {
+        font-size: 12px;
+    }
+    
+    .time-slot-status {
+        font-size: 9px;
+    }
+    
+    /* Mobile Date/Time Selection - Stack */
     .step-time-selection .row {
         flex-direction: column !important;
     }
@@ -860,15 +992,16 @@
     .step-time-selection .col-md-5,
     .step-time-selection .col-md-7 {
         max-width: 100% !important;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
     }
     
     .dates-column {
-        max-height: 250px;
+        max-height: 200px;
+        overflow-y: auto;
     }
     
     .date-row {
-        padding: 12px 15px;
+        padding: 10px 12px;
     }
     
     .date-row-day {
@@ -876,25 +1009,132 @@
     }
     
     .date-row-date {
-        font-size: 12px;
+        font-size: 11px;
     }
     
     .times-grid {
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-        gap: 8px;
-        max-height: 300px;
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        gap: 6px;
+        max-height: 250px;
+        overflow-y: auto;
     }
     
     .time-button {
-        padding: 12px 8px;
-        min-height: 60px;
+        padding: 8px 6px;
+        min-height: 50px;
     }
     
     .time-button-time {
-        font-size: 14px;
+        font-size: 13px;
     }
     
     .time-button-status {
+        font-size: 9px;
+    }
+    
+    /* Mobile Forms */
+    .form-control {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+    
+    .form-label {
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+    
+    /* Mobile Buttons - full width */
+    .btn-primary,
+    .btn-secondary,
+    .btn-success {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+    
+    .selected-date-info {
+        max-width: 100%;
+        padding: 0.75rem;
+    }
+    
+    .selected-date-text {
+        font-size: 14px;
+    }
+    
+    .change-date-btn {
+        padding: 6px 15px;
+        font-size: 11px;
+    }
+}
+
+/* Extra Small Mobile Phones */
+@media (max-width: 480px) {
+    .reservation-wizard {
+        margin: 0.5rem;
+        border-radius: 12px;
+    }
+    
+    .wizard-sidebar {
+        padding: 0.75rem;
+    }
+    
+    .sidebar-step-circle {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+    
+    .sidebar-step-title {
         font-size: 10px;
+    }
+    
+    .sidebar-step-status {
+        display: none; /* Hide on very small screens */
+    }
+    
+    .wizard-content {
+        padding: 0.75rem;
+    }
+    
+    .service-card-compact {
+        padding: 0.5rem;
+        min-height: 90px;
+    }
+    
+    .service-title {
+        font-size: 13px;
+    }
+    
+    .service-price {
+        font-size: 13px;
+    }
+    
+    .calendar-cell {
+        min-height: 35px;
+    }
+    
+    .time-slots-grid-compact {
+        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    }
+    
+    .times-grid {
+        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+    }
+    
+    .time-button {
+        min-height: 45px;
+        padding: 6px 4px;
+    }
+    
+    .time-button-time {
+        font-size: 12px;
+    }
+    
+    .btn-primary,
+    .btn-secondary,
+    .btn-success {
+        padding: 10px 15px;
+        font-size: 13px;
     }
 }

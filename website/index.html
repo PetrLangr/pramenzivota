@@ -67,9 +67,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#rezervace">Rezervace</a>
                             </li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a class="nav-link contact_us" href="#footer_section">Kontakt</a>
-                            </li>
+                            </li> -->
                             <!-- <li class="nav-item">
                                 <a class="nav-link" href="http://localhost:3000/admin" target="_blank">
                                     <i class="fas fa-cogs"></i> Administrace
@@ -610,5 +610,44 @@
 <script src="https://unpkg.com/ityped@0.0.10"></script>
 <script src="assets/js/type.js"></script>
 <script src="assets/js/reservation-wizard.js?v=2024"></script>
+<script>
+// Custom mobile menu - bypass Bootstrap delays
+document.addEventListener('DOMContentLoaded', function() {
+    const toggler = document.querySelector('.navbar-toggler');
+    const navbar = document.querySelector('#navbarSupportedContent');
+    
+    // Override Bootstrap and use custom toggle
+    if (toggler && navbar) {
+        toggler.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            navbar.classList.toggle('show');
+        });
+        
+        // Close menu when clicking on background
+        navbar.addEventListener('click', function(e) {
+            if (e.target === this) {
+                navbar.classList.remove('show');
+            }
+        });
+        
+        // Close menu when clicking on any nav link
+        document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 991) {
+                    navbar.classList.remove('show');
+                }
+            });
+        });
+        
+        // Close menu on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && navbar.classList.contains('show')) {
+                navbar.classList.remove('show');
+            }
+        });
+    }
+});
+</script>
 </body>
 </html>

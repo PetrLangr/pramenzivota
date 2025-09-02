@@ -277,6 +277,40 @@ class ReservationWizard {
                     <div class="wizard-content">
                         ${this.renderCurrentStep()}
                     </div>
+                    
+                    <!-- Mobile Navigation - Fixed Bottom -->
+                    <div class="mobile-navigation">
+                        <div class="mobile-nav-buttons">
+                            ${this.currentStep > 1 && !(this.currentStep === 2 && this.timeSelectionPhase === 'date') ? `
+                                <button class="btn btn-secondary" onclick="wizard.prevStep()" style="flex: 1;">
+                                    <i class="fas fa-arrow-left me-2"></i> Zpět
+                                </button>
+                            ` : ''}
+                            
+                            ${this.currentStep < 3 ? `
+                                <button class="btn btn-primary" onclick="wizard.nextStep()" 
+                                        ${!this.canProceedToNext() ? 'disabled' : ''} style="flex: 2;">
+                                    Pokračovat <i class="fas fa-arrow-right ms-2"></i>
+                                </button>
+                            ` : ''}
+                            
+                            ${this.currentStep === 3 ? `
+                                ${this.reservationData.paymentMethod === 'on-site' ? `
+                                    <button class="btn btn-primary ${!this.isFormValid() ? 'disabled' : ''}" 
+                                            onclick="wizard.completeReservation()" 
+                                            ${!this.isFormValid() ? 'disabled' : ''} style="flex: 1;">
+                                        <i class="fas fa-check me-2"></i>Potvrdit rezervaci
+                                    </button>
+                                ` : `
+                                    <button class="btn btn-success ${!this.isFormValid() ? 'disabled' : ''}" 
+                                            onclick="wizard.completeReservation()" 
+                                            ${!this.isFormValid() ? 'disabled' : ''} style="flex: 1;">
+                                        <i class="fas fa-credit-card me-2"></i>Zaplatit ${this.reservationData.service?.price?.toLocaleString('cs-CZ')} Kč
+                                    </button>
+                                `}
+                            ` : ''}
+                        </div>
+                    </div>
                 </div>
             </div>
         `;

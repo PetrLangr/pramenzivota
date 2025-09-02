@@ -122,7 +122,8 @@ p{
     width: auto;
 }
 .navbar-nav {
-    padding-left: 80px;
+    margin-left: auto;
+    padding-right: 80px;
 }
 .navbar-nav li {
     margin: 0 35px 0 18px;
