@@ -1284,8 +1284,8 @@ textarea {
 .footer-section{
     position: relative;
     background-color: var(--e-global-color-secondary);
-    padding: 308px 0 0px;
-    margin-top: -218px;
+    padding: 150px 0 0px;
+    /* margin-top: -218px; */
 }
 .middle-portion {
     margin-bottom: 92px;
