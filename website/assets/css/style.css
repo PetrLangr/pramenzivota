@@ -96,6 +96,14 @@ p{
     font-weight: 400;
 }
 
+/* Footer Company Details */
+.company-details {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+}
+
 /* Home Page Style */
 
 /* Home Page Header Section Style */
