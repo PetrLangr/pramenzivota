@@ -6,7 +6,7 @@ let AVAILABLE_SERVICES = [];
 // API funkce
 async function loadServicesFromAPI() {
     try {
-        const response = await fetch('http://localhost:3000/api/services');
+        const response = await fetch('http://localhost:3004/api/services');
         const result = await response.json();
         
         if (result.success) {
@@ -48,7 +48,7 @@ async function loadServicesFromAPI() {
 
 async function loadCalendarFromAPI(year, month) {
     try {
-        const response = await fetch(`http://localhost:3000/api/availability?type=calendar&year=${year}&month=${month}`);
+        const response = await fetch(`http://localhost:3004/api/availability?type=calendar&year=${year}&month=${month}`);
         const result = await response.json();
         
         if (result.success) {
@@ -65,7 +65,7 @@ async function loadCalendarFromAPI(year, month) {
 
 async function loadTimeSlotsFromAPI(date) {
     try {
-        const response = await fetch(`http://localhost:3000/api/availability?type=times&date=${date}`);
+        const response = await fetch(`http://localhost:3004/api/availability?type=times&date=${date}`);
         const result = await response.json();
         
         if (result.success) {
@@ -842,7 +842,7 @@ class ReservationWizard {
         
         try {
             // Vytvoř rezervaci přes API
-            const response = await fetch('http://localhost:3000/api/appointments', {
+            const response = await fetch('http://localhost:3004/api/appointments', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -891,7 +891,7 @@ class ReservationWizard {
     
     async processOnlinePayment(appointmentData) {
         try {
-            const response = await fetch('http://localhost:3000/api/payments/create', {
+            const response = await fetch('http://localhost:3004/api/payments/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

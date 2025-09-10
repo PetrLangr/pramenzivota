@@ -22,6 +22,20 @@ Project: Pramen života s.r.o.
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Karla:wght@400;500;600&family=Playfair+Display:wght@400;700&display=swap');
 
+/* Trajan Pro Font */
+@font-face {
+    font-family: 'TrajanPro';
+    src: url('../fonts/TrajanPro-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'TrajanPro';
+    src: url('../fonts/TrajanPro-Bold.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}
+
 body {
     font-family: 'Karla', sans-serif;
 }
@@ -41,26 +55,26 @@ html{
     scroll-behavior: smooth;
 }
 h1{
-    font-family: 'Playfair Display', serif;
+    font-family: 'TrajanPro', serif;
     font-size: 64px;
     line-height: 82px;
     font-weight: 700;
     color: var(--e-global-color-white);
 }
 h2{
-    font-family: 'Playfair Display', serif;
+    font-family: 'TrajanPro', serif;
     font-size: 48px;
     line-height: 55px;
     font-weight: 700;
 }
 h3{
-    font-family: 'Playfair Display', serif;
+    font-family: 'TrajanPro', serif;
     font-size: 22px;
     line-height: 55px;
     font-weight: 700;
 }
 h4{
-    font-family: 'Playfair Display', serif;
+    font-family: 'TrajanPro', serif;
     font-size: 22px;
     line-height: 30px;
     font-weight: 700;
@@ -71,7 +85,7 @@ h5{
     font-weight: 400;
 }
 h6{
-    font-family: 'Playfair Display', serif;
+    font-family: 'TrajanPro', serif;
     font-size: 20px;
     line-height: 28px;
     font-weight: 700;
@@ -118,7 +132,7 @@ p{
     padding-bottom: 0;
 }
 .navbar-brand img {
-    max-height: 65px;
+    max-height: 85px;
     width: auto;
 }
 .navbar-nav {

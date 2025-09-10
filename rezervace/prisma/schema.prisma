@@ -379,3 +379,90 @@ model Settings {
 
   @@map("settings")
 }
+
+// ============================================================================
+// UDÁLOSTI A KURZY
+// ============================================================================
+
+model Event {
+  id              String @id @default(cuid())
+  name            String
+  description     String
+  
+  // Datum a čas
+  date            DateTime
+  startTime       String    // HH:MM formát
+  durationMinutes Int       // Délka v minutách
+  
+  // Kapacita a cena
+  price           Decimal   @db.Decimal(10,2)
+  currency        String    @default("CZK")
+  maxParticipants Int
+  
+  // Místo a lektor
+  location        String
+  instructor      String
+  
+  // Metadata
+  image           String?   // URL obrázku události
+  category        String    // workshop, course, event, certification
+  requirements    String?   // Požadavky/prerequisity
+  
+  // Status
+  isActive        Boolean   @default(true)
+  
+  // Relace
+  registrations   EventRegistration[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("events")
+}
+
+// ============================================================================
+// REGISTRACE NA UDÁLOSTI
+// ============================================================================
+
+model EventRegistration {
+  id          String @id @default(cuid())
+  
+  // Základní údaje účastníka
+  name        String
+  email       String
+  phone       String
+  experience  String? // Zkušenosti s tématem
+  
+  // Status registrace
+  status      EventRegistrationStatus @default(CONFIRMED)
+  
+  // Platba
+  paymentMethod EventPaymentMethod
+  
+  // GDPR
+  gdprConsent Boolean @default(false)
+  
+  // Relace
+  eventId     String
+  event       Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("event_registrations")
+}
+
+enum EventRegistrationStatus {
+  PENDING   // Čeká na platbu
+  CONFIRMED // Potvrzená
+  CANCELED  // Zrušená
+  ATTENDED  // Účastník se zúčastnil
+  NO_SHOW   // Nedostavil se
+}
+
+enum EventPaymentMethod {
+  CARD         // Platební karta
+  BANK_TRANSFER // Bankovní převod
+  ON_SITE      // Platba na místě
+  PAYPAL       // PayPal
+}

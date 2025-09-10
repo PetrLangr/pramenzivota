@@ -31,7 +31,7 @@ function generateAvailabilityForMonth(year: number, month: number) {
 }
 
 function generateTimeSlotsForDate(date: string) {
-  const timeSlots = [];
+  const timeSlots: Array<{time: string; available: boolean; date: string}> = [];
   const workingHours = [
     { start: 9, end: 12 },   // Dopoledne
     { start: 14, end: 17 }   // Odpoledne
