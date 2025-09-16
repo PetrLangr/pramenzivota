@@ -25,21 +25,28 @@ async function loadServicesFromAPI() {
                 name: 'Energetické vyšetření',
                 duration: 60,
                 price: 1200,
-                description: 'Komplexní diagnostika energetických toků a blokád v těle.'
+                description: 'Komplexní diagnostika energetických center a toků. Odhalíme blokády a navrhneme individuální cestu k obnově vaší vitality.'
             },
             {
-                id: 'chakra-therapy',
-                name: 'Chakrová terapie',
+                id: 'self-discovery-sessions',
+                name: 'Sebepoznávácí setkání',
                 duration: 90,
                 price: 1500,
-                description: 'Harmonizace a vyrovnání všech sedmi hlavních chaker.'
+                description: 'Individuální a skupinové sebepoznávácí setkání zaměřené na hluboký vhled do vlastní osobnosti, odkrývání životních vzorců a rozvoj autenticity.'
             },
             {
-                id: 'reiki-healing',
-                name: 'Reiki léčení',
+                id: 'sound-journey',
+                name: 'Cesta zvukem',
+                duration: 75,
+                price: 1300,
+                description: 'Unikátní terapeutická metoda založená na léčivých frekvencích a vibracích. Harmonizace celé bytosti pomocí sákrálních nástrojů a zvukových fénoménů.'
+            },
+            {
+                id: 'vibrational-massage',
+                name: 'Vibračně akustická masáž',
                 duration: 60,
                 price: 1100,
-                description: 'Japonská technika energetického léčení a relaxace.'
+                description: 'Hluboká relaxační masáž zpívajícími mísami a sákrálními nástroji. Vibrace pronikají hlouběji do těla a podporují přirozené regenerační procesy.'
             }
         ];
         return false;

@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../trajan-pro"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "pramen_zivota"
+	}
+}

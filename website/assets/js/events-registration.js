@@ -38,8 +38,8 @@ async function loadEventsFromAPI() {
             },
             {
                 id: 'meditation-immersion',
-                name: 'Hluboká meditace a mindfulness',
-                description: 'Intenzivní meditační workshop zaměřený na hlubokou relaxaci, vědomou přítomnost a vnitřní klid. Naučíte se pokročilé techniky mindfulness.',
+                name: 'Hluboká meditace a vědomá přítomnost',
+                description: 'Intenzivní meditační workshop zaměřený na hlubokou relaxaci, vědomou přítomnost a vnitřní klid. Naučíte se pokročilé techniky vědomé přítomnosti.',
                 date: '2025-10-08',
                 time: '10:00',
                 duration: 240,
