@@ -1172,7 +1172,7 @@
         letter-spacing: 1px;
     }
     .navbar-nav .active > a {
-        font-weight: 600;
+        font-weight: 400;
         background: none !important;
         color: var(--e-global-color-soft-orange) !important;
     }

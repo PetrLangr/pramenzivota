@@ -41,11 +41,11 @@ body {
 }
 :root {
     --e-global-color-primary: #1E3A5F;
-    --e-global-color-secondary: #2E86AB;
+    --e-global-color-secondary: #05A6CC;
     --e-global-color-text: #4A5568;
     --e-global-color-accent: #0F2027;
 	--e-global-color-white: #ffffff;
-    --e-global-color-soft-orange: #7FB069;
+    --e-global-color-soft-orange: #E0CCAC;
     --e-global-color-desaturated-magenta: #4A90A4;
     --e-global-color-very-dark-desaturated-magenta: #1A365D;
     --e-global-color-mostly-desaturated-magenta: #63B3ED;
@@ -161,16 +161,16 @@ p{
     font-family: 'Playfair Display', serif;
     font-size: 20px;
     line-height: 20px;
-    font-weight: 600;
+    font-weight: 400;
     color: var(--e-global-color-white) !important;
     transition: all 0.3s ease-in-out;
 }
 .navbar-nav .nav-item a:hover{
-    color: #1E3A5F !important;
+    color: #e0ccac !important;
     background-color: transparent;
 }
 .navbar-nav .active > a{
-    color: #1E3A5F !important;
+    color: #e0ccac !important;
 }
 .navbar-nav .dropdown{
     margin: 0 15px 0 20px;
@@ -2216,4 +2216,9 @@ textarea {
 }
 .single-post .single-post-heading {
     font-size: 30px !important;
+}
+
+/* Hide arrows in services section */
+.services_box_content .services_box_lower_portion .btn_wrapper i {
+    display: none !important;
 }

@@ -6,11 +6,11 @@ body {
 
 :root {
     --e-global-color-primary: #1E3A5F;
-    --e-global-color-secondary: #2E86AB;
+    --e-global-color-secondary: #05A6CC;
     --e-global-color-text: #4A5568;
     --e-global-color-accent: #0F2027;
 	--e-global-color-white: #ffffff;
-    --e-global-color-soft-orange: #7FB069;
+    --e-global-color-soft-orange: #E0CCAC;
     --e-global-color-desaturated-magenta: #4A90A4;
     --e-global-color-very-dark-desaturated-magenta: #1A365D;
     --e-global-color-mostly-desaturated-magenta: #63B3ED;
