@@ -109,7 +109,7 @@ p{
 /* Home Page Header Section Style */
 
 .banner-section-outer{
-    background: linear-gradient(135deg, #2E86AB 0%, #1E3A5F 100%);
+    background: #02A6CC;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -159,18 +159,18 @@ p{
 }
 .navbar-nav .nav-item a{
     font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    line-height: 18px;
-    font-weight: 400;
+    font-size: 20px;
+    line-height: 20px;
+    font-weight: 600;
     color: var(--e-global-color-white) !important;
     transition: all 0.3s ease-in-out;
 }
 .navbar-nav .nav-item a:hover{
-    color: var(--e-global-color-soft-orange) !important;
+    color: #1E3A5F !important;
     background-color: transparent;
 }
 .navbar-nav .active > a{
-    color: var(--e-global-color-soft-orange) !important;
+    color: #1E3A5F !important;
 }
 .navbar-nav .dropdown{
     margin: 0 15px 0 20px;
@@ -453,6 +453,7 @@ p{
 .services_section .services_box_content .services_box_upper_portion{
     margin-bottom: 10px;
     animation: float_img 6s ease-in-out infinite;
+    text-align: center;
 }
 .services_section .services_box_content .services_box_upper_portion img{
     transition: all 0.3s ease-in-out;
