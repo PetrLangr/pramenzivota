@@ -32,7 +32,7 @@ body {
 .services_box_upper_portion img[src*="services_img_2.webp"],
 .services_box_upper_portion img[src*="services_img_3.webp"],
 .services_box_upper_portion img[src*="services_img_4.webp"] {
-    width: 255px;
+    width: 300px;
     height: 357px;
     object-fit: cover;
     object-position: center;

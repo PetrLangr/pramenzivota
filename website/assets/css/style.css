@@ -453,10 +453,15 @@ p{
 .services_section .services_box_content .services_box_upper_portion{
     margin-bottom: 10px;
     animation: float_img 6s ease-in-out infinite;
-    text-align: center;
 }
 .services_section .services_box_content .services_box_upper_portion img{
     transition: all 0.3s ease-in-out;
+}
+.services_box_upper_portion img[src*="services_img_1.webp"], 
+.services_box_upper_portion img[src*="services_img_2.webp"], 
+.services_box_upper_portion img[src*="services_img_3.webp"], 
+.services_box_upper_portion img[src*="services_img_4.webp"] {
+    width: 300px;
 }
 @keyframes float_img {
 	0% {
