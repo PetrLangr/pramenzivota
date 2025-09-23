@@ -462,6 +462,7 @@ p{
 .services_box_upper_portion img[src*="services_img_3.webp"], 
 .services_box_upper_portion img[src*="services_img_4.webp"] {
     width: 300px;
+    object-position: 20% center;
 }
 @keyframes float_img {
 	0% {
